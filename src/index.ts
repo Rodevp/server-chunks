@@ -25,7 +25,7 @@ app.get("/video", (req: Request, res: Response) => {
             ? Math.min(startRangeBytes  + chunkSize, videoSize - 1)
             : Number(range?.[1]);
 
-    if (startRangeBytes >= videoSize) return res.status(416).send("Range start exceeds video size");
+    if (startRangeBytes > videoSize) return res.status(416).send("Range start exceeds video size");
     if (finalRangeBytes > videoSize - 1) return res.status(416).send("Range end exceeds video size");
     if (startRangeBytes > finalRangeBytes) return res.status(416).send("Inavlied Range");
 
